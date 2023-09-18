@@ -1,4 +1,4 @@
--f https://download.pytorch.org/whl/cpu
+-f https://download.pytorch.org/whl/torch_stable.html
 blinker==1.6.2
 certifi==2022.12.7
 charset-normalizer==2.1.1
