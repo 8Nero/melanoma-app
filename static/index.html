@@ -1,56 +1,80 @@
-<html>
-    <head>
-        <!-- Load vue.js and axois.js -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    </head>
-    <body>
-        <!-- The APP UI -->
-        <div id="app" style="width: 50%; margin: 200px auto">
-            <form id="imageForm" enctype="multipart/form-data" method="POST" style="text-align: center; display: block">
-                <label for="imageFile">Select image to classify:</label
-                ><input id="imageFile" name="file" type="file" style="margin-left: 10px" />
+<!DOCTYPE html>
+<html lang="en">
 
-                <img v-if="image" :src="image" style="width: 250px; display: block; margin: 50px auto 10px" />
-                <div v-if="prediction" style="font-size: 32px; font-weight: bold; text-align: center">
-                    {{ prediction }}
-                </div>
-                <input v-if="image" type="submit" value="Classify Image" style="margin: 20px 20px" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melanoma App</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Merriweather&family=Montserrat:wght@400;900&family=Ubuntu&display=swap"
+          rel="stylesheet">
+    <!-- Google font icon -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <!-- Load vue.js and axois.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body>
+    <!-- The APP UI -->
+    <header>
+        <h1><span class="material-symbols-outlined">
+                sensor_occupied
+            </span> Melanoma App</h1>
+    </header>
+    <section id="main">
+        <div id="app">
+            <div>
+                <h3>Select an image to classify!</h3>
+            </div>
+            <form id="imageForm" enctype="multipart/form-data" method="POST">
+                <label for="imageFile">Choose File</label>
+                <input id="imageFile" name="file" type="file" />
+                <img v-if="image" :src="image" alt="image" />
+                <label for="classifyImage" v-if="image">Classify Image</label>
+                <input id="classifyImage" type="submit" />
+                <div class="prediction" v-if="prediction">{{ prediction }}</div>
             </form>
         </div>
+    </section>
 
-        <script>
-            <!-- The Vue application -->
-            var app = new Vue({
-                el: "#app",
-                data() {
-                    return {
-                        image: null,
-                        prediction: null,
-                    };
-                },
-            });
+    <script>
+        // The Vue application
+        var app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    image: null,
+                    prediction: null,
+                };
+            },
+        });
 
-            <!-- Calling the predict API when the form is submitted -->
-            document.getElementById("imageForm").addEventListener("submit", (e) => {
-                axios
-                    .post("/predict", new FormData(document.getElementById("imageForm")), {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    })
-                    .then((response) => (app.prediction = response.data));
+        // Calling the predict API when the form is submitted
+        document.getElementById("imageForm").addEventListener("submit", (e) => {
+            axios
+                .post("/predict", new FormData(document.getElementById("imageForm")), {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                .then((response) => (app.prediction = response.data));
 
-                e.preventDefault();
-            });
+            e.preventDefault();
+        });
 
-            <!-- Display the selected image -->
-            document.getElementById("imageFile").addEventListener("change", (e) => {
-                const [file] = document.getElementById("imageFile").files;
-                if (file) {
-                    app.image = URL.createObjectURL(file);
-                }
-            });
-        </script>
-    </body>
+        // Display the selected image
+        document.getElementById("imageFile").addEventListener("change", (e) => {
+            const [file] = document.getElementById("imageFile").files;
+            if (file) {
+                app.image = URL.createObjectURL(file);
+            }
+        });
+    </script>
+</body>
+
 </html>

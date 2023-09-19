@@ -1,0 +1,96 @@
+html {
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+}
+
+header {
+    background-color: purple;
+    padding: 16px 32px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    width: -webkit-fill-available;
+    position: fixed;
+}
+
+header h1 {
+    color: #fff;
+    font-weight: 200;
+}
+
+header img {
+    background-color: purple;
+}
+
+#main {
+    background-color: #E5CFF7;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#app {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw 4vw;
+    width: 90%;
+    min-height: 383px;
+    max-width: 600px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#app>div {
+    margin-bottom: 20px;
+}
+
+#app img {
+    width: 400px;
+    display: block;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 2px purple;
+}
+
+div.prediction {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    border: 3px solid violet;
+    margin: 20px auto;
+    width: fit-content;
+    min-width: 200px;
+    border-radius: 3px;
+
+}
+
+#imageForm label {
+    cursor: pointer;
+    background-color: black;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+#imageForm input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+/* iPhone X || 375 x 812 || Default */
+@media only screen and (max-width: 812px) {
+    header {
+        font-size: 12px;
+        padding: 12px 20px;
+    }
+
+    #app img {
+        width: 200px;
+    }
+}
