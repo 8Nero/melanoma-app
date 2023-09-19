@@ -6,7 +6,7 @@ from PIL import Image
 from torch import argmax
 from torchvision import models
 import torchvision.transforms as transforms
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, render_template
 
 # Load a pre-trainied DenseNet model from torchvision.models
 model = models.densenet121(weights=models.DenseNet121_Weights.DEFAULT)
@@ -44,7 +44,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-  return send_from_directory("static", "index.html")
+  return render_template("index.html")
 
 
 @app.route("/predict", methods=["POST"])
