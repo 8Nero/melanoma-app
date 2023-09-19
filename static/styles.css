@@ -7,6 +7,10 @@ html {
     font-family: 'Merriweather', serif;
 }
 
+body {
+    background-color: #E5CFF7;
+}
+
 header {
     background-color: purple;
     padding: 16px 32px;
@@ -20,12 +24,7 @@ header h1 {
     font-weight: 200;
 }
 
-header img {
-    background-color: purple;
-}
-
 #main {
-    background-color: #E5CFF7;
     width: 100%;
     height: 100vh;
     display: flex;
